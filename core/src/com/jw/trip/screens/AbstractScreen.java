@@ -8,16 +8,15 @@ import com.badlogic.gdx.utils.TimeUtils;
 import com.jw.trip.TripToSpace;
 
 public class AbstractScreen implements Screen {
-	protected final TripToSpace game;
-	protected final BitmapFont font;
-	protected float w;
-	protected float h;
-	protected float aspect;
-	protected long screenShowTime;
+	protected final 	TripToSpace game;
+	protected 			BitmapFont font;
+	protected int 		w;
+	protected int 		h;
+	protected float 	aspect;
+	protected long 		screenShowTime;
+	protected float 	accumulator;
 	
 	public AbstractScreen (TripToSpace game) {
-		Gdx.app.log(TripToSpace.LOG, "constructing screen!");
-
 		this.game = game;
 		this.font = new BitmapFont(Gdx.files.internal("fonts/bauchaomaicha.fnt"));
 		this.w = Gdx.graphics.getWidth();
@@ -33,13 +32,16 @@ public class AbstractScreen implements Screen {
 	@Override
 	public void show() {
 		Gdx.app.log(TripToSpace.LOG, "Showing screen: " + getName());	
-		this.screenShowTime = TimeUtils.millis();		
+		screenShowTime = TimeUtils.millis();
+		accumulator = 0.f;
 	}
 
 	@Override
 	public void render(float delta) {
 		Gdx.gl.glClearColor(0f, 0f, 0f, 1f); //clear screen with black color
 		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
+		accumulator = accumulator + delta;
+		//Gdx.app.log(TripToSpace.LOG, "Time accumulator and delta are: " + accumulator + ", " + delta);
 	}
 
 	@Override

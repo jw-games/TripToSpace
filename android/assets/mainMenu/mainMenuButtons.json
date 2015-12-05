@@ -1,0 +1,32 @@
+{
+    com.badlogic.gdx.graphics.Color: {
+        white: { r: 1, g: 1, b: 1, a: 1 },
+        red: { r: 1, g: 0, b: 0, a: 1 },
+        yellow: { r: 0.5, g: 0.5, b: 0, a: 1 }
+    },
+    com.badlogic.gdx.graphics.g2d.BitmapFont: {
+        medium: { file: "fonts/bauchaomaicha.fnt" }
+    },
+    com.badlogic.gdx.scenes.scene2d.ui.TextButton$TextButtonStyle: {
+        default: {
+            down: blue_button03, up: blue_button02, over: blue_button00
+            font: medium, fontColor: white
+        },
+        buttonPlay: {
+            down: green_button03, up: green_button02, over: green_button00
+            font: medium, fontColor: white
+        },        
+        buttonContinue: {
+            down: blue_button03, up: blue_button02, over: blue_button00
+            font: medium, fontColor: white
+        },
+        buttonHelp: {
+            down: yellow_button03, up: yellow_button02, over: yellow_button00
+            font: medium, fontColor: white
+        },
+        buttonExit: {
+            down: red_button03, up: red_button02, over: red_button00
+            font: medium, fontColor: white
+        }     
+    }
+}
