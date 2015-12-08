@@ -47,7 +47,7 @@ public class HelpScreen extends AbstractScreen {
 		bkgimage = new Image(bkg);
 		bkgimage.setBounds(0, 0, worldWidth, worldWidth);
 		bkgimage.setColor(1, 1, 1, 0);
-		bkgimage.addAction(Actions.sequence(Actions.delay(2f), Actions.alpha(0f), Actions.fadeIn(3f)));
+		bkgimage.addAction(Actions.sequence(Actions.delay(0.2f), Actions.alpha(0f), Actions.fadeIn(0.3f)));
 		stage.addActor(bkgimage);
 		
 		// Set up button table actors and listeners
@@ -72,14 +72,20 @@ public class HelpScreen extends AbstractScreen {
 				+ "lsfjglsfjgnfsj\n"
 				+ "slfjglsfjglsjgls\n";
 		text 		= new Label(helpstring, skin);
-		text.setWrap(true);
+		//text.setWrap(true);
 		backbtn 	= new TextButton("Return to menu", skin);
 		table		= new Table();
 		container	= new Table();
-		table.add(container);
 		container.add(text);
-		table.add(backbtn);
 		scroller 	= new ScrollPane(container);
+		scroller.setScrollbarsOnTop(true);
+		scroller.setScrollBarPositions(true, true);
+		scroller.setStyle(new ScrollPane.ScrollPaneStyle());
+		scroller.setSize(250, 200);
+		table.setBounds(0, 0, 300, 300);
+		table.add(scroller).row();
+		table.add(backbtn);
+
 		//scroller.setBounds(0, 300, 300, 90);
 		
 
