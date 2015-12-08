@@ -87,10 +87,10 @@ public class TitleScreen extends AbstractScreen {
 				})));
 		}});		
 		
-		menuButtonTable.add(buttonPlay).width(worldWidth/2).height(worldHeight/14).pad(1f).space(1f).row();
-		menuButtonTable.add(buttonContinue).width(worldWidth/2).height(worldHeight/14).pad(1f).space(1f).row();
-		menuButtonTable.add(buttonHelp).width(worldWidth/2).height(worldHeight/14).pad(1f).space(1f).row();
-		menuButtonTable.add(buttonExit).width(worldWidth/2).height(worldHeight/14).pad(1f).space(1f).row();
+		menuButtonTable.add(buttonPlay).width(worldWidth/2).height(worldHeight/9).pad(1f).space(1f).row();
+		menuButtonTable.add(buttonContinue).width(worldWidth/2).height(worldHeight/9).pad(1f).space(1f).row();
+		menuButtonTable.add(buttonHelp).width(worldWidth/2).height(worldHeight/9).pad(1f).space(1f).row();
+		menuButtonTable.add(buttonExit).width(worldWidth/2).height(worldHeight/9).pad(1f).space(1f).row();
 		//menuButtonTable.setScale(0.5f);
 		stage.addActor(menuButtonTable);
 	}
