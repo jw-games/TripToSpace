@@ -9,6 +9,7 @@ import com.badlogic.gdx.scenes.scene2d.actions.Actions;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.ScrollPane;
+import com.badlogic.gdx.scenes.scene2d.ui.ScrollPane.ScrollPaneStyle;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
@@ -26,6 +27,8 @@ public class HelpScreen extends AbstractScreen {
 	
 	Label				text;
 	ScrollPane			scroller;
+	ScrollPaneStyle		scrollstyle;
+	Image				scrollarrows;
 	TextButton			backbtn;
 	Table				table;
 	Table				container;
@@ -77,10 +80,14 @@ public class HelpScreen extends AbstractScreen {
 		table		= new Table();
 		container	= new Table();
 		container.add(text);
-		scroller 	= new ScrollPane(container);
+		scrollstyle = new ScrollPane.ScrollPaneStyle();
+		scrollarrows = new Image(new Texture(Gdx.files.internal("scrollarrows.png")));
+		//scrollstyle.vScroll = scrollarrows.getDrawable();
+		scrollstyle.vScrollKnob = scrollarrows.getDrawable();
+		//scrollstyle.background = scrollarrows.getDrawable();
+		scroller 	= new ScrollPane(container, scrollstyle);
 		scroller.setScrollbarsOnTop(true);
 		scroller.setScrollBarPositions(true, true);
-		scroller.setStyle(new ScrollPane.ScrollPaneStyle());
 		scroller.setSize(250, 200);
 		table.setBounds(0, 0, 300, 300);
 		table.add(scroller).row();
