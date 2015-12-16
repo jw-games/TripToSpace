@@ -8,6 +8,8 @@ public class Constants {
 	public static final float 	VIEW_WIDTH 		= 60;
 	public static final float 	VIEW_HEIGHT 	= 100;
 	
+	public static final float	worldWidth 		= 300;
+	public static final float	worldHeight 	= 300;
 	
 
 }

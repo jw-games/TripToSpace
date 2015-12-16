@@ -1,7 +1,6 @@
 package com.jw.trip.screens;
 
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
@@ -12,13 +11,10 @@ import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
-import com.badlogic.gdx.utils.viewport.StretchViewport;
 import com.jw.trip.TripToSpace;
 import com.jw.trip.utils.Constants;
 
 public class TitleScreen extends AbstractScreen {
-	float				worldWidth 	= 300;
-	float				worldHeight = 300;
 	
 	Stage				stage;
 	
@@ -34,8 +30,8 @@ public class TitleScreen extends AbstractScreen {
 		
 		// Create stage and adjust camera and viewport
 		stage = new Stage();
-		stage.getViewport().setWorldSize(worldWidth, worldHeight);
-		stage.getCamera().position.set(worldWidth/2, worldHeight/2, 0);
+		stage.getViewport().setWorldSize(Constants.worldWidth, Constants.worldHeight);
+		stage.getCamera().position.set(Constants.worldWidth/2, Constants.worldHeight/2, 0);
 		stage.getViewport().setScreenBounds(0, 0, w, h);
 		stage.getCamera().update();
 		stage.getViewport().apply();		
@@ -43,14 +39,14 @@ public class TitleScreen extends AbstractScreen {
 		// Add background image actor and add to stage
 		bkg = new Texture(Gdx.files.internal("title.jpg"));
 		bkgimage = new Image(bkg);
-		bkgimage.setBounds(0, 0, worldWidth, worldWidth);
+		bkgimage.setBounds(0, 0, Constants.worldWidth, Constants.worldWidth);
 		bkgimage.setColor(1, 1, 1, 0);
-		bkgimage.addAction(Actions.sequence(Actions.delay(2f), Actions.alpha(0f), Actions.fadeIn(3f)));
+		bkgimage.addAction(Actions.sequence(Actions.delay(1f), Actions.alpha(0f), Actions.fadeIn(2f)));
 		stage.addActor(bkgimage);
 		
 		// Set up button table actors and listeners
 		menuButtonTable = new Table();
-		menuButtonTable.setPosition(worldWidth/2, worldHeight/3);
+		menuButtonTable.setPosition(Constants.worldWidth/2, Constants.worldHeight/3);
 		//menuButtonTable.setBounds(worldWidth/4, worldHeight/8, worldWidth/2, worldHeight*0.75f);
 		menuButtonSkin = new Skin(Gdx.files.internal("mainMenu/mainMenuButtons.json"),
 				new TextureAtlas(Gdx.files.internal("mainMenu/mainMenuButtons.pack")));
@@ -64,7 +60,8 @@ public class TitleScreen extends AbstractScreen {
 				bkgimage.addAction(Actions.sequence(Actions.fadeOut(0.6f), Actions.run(new Runnable() {				
 					public void run() {				
 						dispose();
-						game.setScreen(new GameScreen(game));
+						game.decisions = "0";
+						game.setScreen(new ReadScreen(game));
 					}
 				})));
 			}});
@@ -87,10 +84,10 @@ public class TitleScreen extends AbstractScreen {
 				})));
 		}});		
 		
-		menuButtonTable.add(buttonPlay).width(worldWidth/2).height(worldHeight/9).pad(1f).space(1f).row();
-		menuButtonTable.add(buttonContinue).width(worldWidth/2).height(worldHeight/9).pad(1f).space(1f).row();
-		menuButtonTable.add(buttonHelp).width(worldWidth/2).height(worldHeight/9).pad(1f).space(1f).row();
-		menuButtonTable.add(buttonExit).width(worldWidth/2).height(worldHeight/9).pad(1f).space(1f).row();
+		menuButtonTable.add(buttonPlay).width(Constants.worldWidth/2).height(Constants.worldHeight/9).pad(1f).space(1f).row();
+		menuButtonTable.add(buttonContinue).width(Constants.worldWidth/2).height(Constants.worldHeight/9).pad(1f).space(1f).row();
+		menuButtonTable.add(buttonHelp).width(Constants.worldWidth/2).height(Constants.worldHeight/9).pad(1f).space(1f).row();
+		menuButtonTable.add(buttonExit).width(Constants.worldWidth/2).height(Constants.worldHeight/9).pad(1f).space(1f).row();
 		//menuButtonTable.setScale(0.5f);
 		stage.addActor(menuButtonTable);
 	}

@@ -2,7 +2,6 @@ package com.jw.trip.screens;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
-import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.actions.Actions;
@@ -15,10 +14,9 @@ import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.jw.trip.TripToSpace;
+import com.jw.trip.utils.Constants;
 
 public class HelpScreen extends AbstractScreen {
-	float				worldWidth 	= 300;
-	float				worldHeight = 300;
 	
 	Stage				stage;
 	
@@ -39,8 +37,8 @@ public class HelpScreen extends AbstractScreen {
 		
 		// Create stage and adjust camera and viewport
 		stage = new Stage();
-		stage.getViewport().setWorldSize(worldWidth, worldHeight);
-		stage.getCamera().position.set(worldWidth/2, worldHeight/2, 0);
+		stage.getViewport().setWorldSize(Constants.worldWidth, Constants.worldHeight);
+		stage.getCamera().position.set(Constants.worldWidth/2, Constants.worldHeight/2, 0);
 		stage.getViewport().setScreenBounds(0, 0, w, h);
 		stage.getCamera().update();
 		stage.getViewport().apply();		
@@ -48,7 +46,7 @@ public class HelpScreen extends AbstractScreen {
 		// Add background image actor and add to stage
 		bkg = new Texture(Gdx.files.internal("title.jpg"));
 		bkgimage = new Image(bkg);
-		bkgimage.setBounds(0, 0, worldWidth, worldWidth);
+		bkgimage.setBounds(0, 0, Constants.worldWidth, Constants.worldWidth);
 		bkgimage.setColor(1, 1, 1, 0);
 		bkgimage.addAction(Actions.sequence(Actions.delay(0.2f), Actions.alpha(0f), Actions.fadeIn(0.3f)));
 		stage.addActor(bkgimage);
@@ -75,11 +73,11 @@ public class HelpScreen extends AbstractScreen {
 				+ "lsfjglsfjgnfsj\n"
 				+ "slfjglsfjglsjgls\n";
 		text 		= new Label(helpstring, skin);
-		//text.setWrap(true);
+		text.setWrap(true);
 		backbtn 	= new TextButton("Return to menu", skin);
 		table		= new Table();
 		container	= new Table();
-		container.add(text);
+		container.add(text).width(250);
 		scrollstyle = new ScrollPane.ScrollPaneStyle();
 		scrollarrows = new Image(new Texture(Gdx.files.internal("scrollarrows.png")));
 		//scrollstyle.vScroll = scrollarrows.getDrawable();
@@ -109,7 +107,7 @@ public class HelpScreen extends AbstractScreen {
 		
 		//menuButtonTable.setScale(0.5f);
 		stage.addActor(table);
-		scroller.setPosition(worldWidth/2, worldHeight/2);
+		scroller.setPosition(Constants.worldWidth/2, Constants.worldHeight/2);
 		//table.
 	}
 	
