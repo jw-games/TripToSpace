@@ -2,6 +2,7 @@ package com.jw.trip.screens;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.actions.Actions;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
@@ -11,6 +12,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.ui.ScrollPane.ScrollPaneStyle;
+import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.jw.trip.TripToSpace;
 import com.jw.trip.utils.Constants;
 
@@ -26,7 +28,7 @@ public class ReadScreen extends AbstractScreen {
 	ScrollPane			scroller;
 	ScrollPaneStyle		scrollstyle;
 	Image				scrollarrows;
-	TextButton			backbtn;
+	TextButton			continuebtn;
 	Table				table;
 	Table				container;
 
@@ -54,22 +56,23 @@ public class ReadScreen extends AbstractScreen {
 		
 		text 		= new Label(game.gamedata.data.get(game.decisions).get(0), skin);
 		text.setWrap(true);
-		backbtn 	= new TextButton("Return to menu", skin);
+
 		table		= new Table();
 		container	= new Table();
-		container.add(text).width(250);
-		scrollstyle = new ScrollPane.ScrollPaneStyle();
-		scrollarrows = new Image(new Texture(Gdx.files.internal("scrollarrows.png")));
-		//scrollstyle.vScroll = scrollarrows.getDrawable();
-		scrollstyle.vScrollKnob = scrollarrows.getDrawable();
-		//scrollstyle.background = scrollarrows.getDrawable();
-		scroller 	= new ScrollPane(container, scrollstyle);
-		scroller.setScrollbarsOnTop(true);
-		scroller.setScrollBarPositions(true, true);
-		scroller.setSize(250, 200);
+		container.add(text).width(260);
+
+		scroller 	= new ScrollPane(container, skin, "alpha");
+
+		continuebtn	= new TextButton("Continue", skin);
+		continuebtn.addListener(new ClickListener() {
+			public void clicked(InputEvent event, float x, float y) {		
+				
+			}
+		});
+
 		table.setBounds(0, 0, 300, 300);
-		table.add(scroller).row();
-		table.add(backbtn);
+		table.add(scroller).width(300).row();
+		table.add(continuebtn);
 
 		stage.addActor(table);
 		scroller.setPosition(Constants.worldWidth/2, Constants.worldHeight/2);

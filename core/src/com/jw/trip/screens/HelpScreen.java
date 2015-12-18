@@ -19,6 +19,7 @@ import com.jw.trip.utils.Constants;
 public class HelpScreen extends AbstractScreen {
 	
 	Stage				stage;
+	Skin				skin;
 	
 	Texture 			bkg;
 	Image				bkgimage;
@@ -34,6 +35,8 @@ public class HelpScreen extends AbstractScreen {
 
 	public HelpScreen(final TripToSpace game) {
 		super(game);
+		
+		skin = new Skin(Gdx.files.internal("skin/uiskin.json"));
 		
 		// Create stage and adjust camera and viewport
 		stage = new Stage();
@@ -52,47 +55,29 @@ public class HelpScreen extends AbstractScreen {
 		stage.addActor(bkgimage);
 		
 		// Set up button table actors and listeners
-		final Skin skin = new Skin(Gdx.files.internal("skin/uiskin.json"));
-		CharSequence helpstring = "asdf\n"
-				+ "as;lfghsflgh\n"
-				+ "lasghafffffffffffffffffffffffffffffffffffffl;fjsg;flsgj\n"
-				+ "s;lfdgkflsjg\n"
-				+ "s;kjgfffffffffffffffffffffsfalgjsfljg\n"
-				+ "sfjghsfjgs\n"
-				+ "lsfjfffffffffffffffffffffffffffffffffffffffffffffffglsfjgnfsj\n"				
-				+ "s;lfdgkflsjg\n"
-				+ "s;kjgsfalgjsfljg\n"
-				+ "sfjghsfjgs\n"
-				+ "lsfjglsfffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffjgnfsj\n"
-				+ "s;kjgsfalgjsfljg\n"
-				+ "sfjghsfjgs\n"
-				+ "lsfjglsfjgnfsj\n"				
-				+ "s;lfdgkflsjg\n"
-				+ "s;kjgsfalgjsfljg\n"
-				+ "sfjghsfjgs\n"
-				+ "lsfjglsfjgnfsj\n"
-				+ "slfjglsfjglsjgls\n";
+		String helpstring = "This is a choose-your-own adventure game targeted at children 6-600 years old. "
+				+ "The game is played by reading a part of the story, then choosing from several options about how to proceed. "
+				+ "Some choices will have an immediate and obvious impact (such as the end of the game), "
+				+ "while others may not be apparent until much later in the game, "
+				+ "but all choices made by the player will have some impact on the outcome of the story. "
+				+ "There's no one single way to \"win\" the game, although there are certainly many choices that will lead to \"losing\". "
+				+ "Your game will be autosaved after each choice you make, so you can quit at anytime and resume where you left off "
+				+ "by simply clicking the \"Continue\" button (but beware if you start a new game your old one will be erased). "
+				+ "Best of luck in your travels...";
 		text 		= new Label(helpstring, skin);
 		text.setWrap(true);
-		backbtn 	= new TextButton("Return to menu", skin);
+		
 		table		= new Table();
 		container	= new Table();
-		container.add(text).width(250);
-		scrollstyle = new ScrollPane.ScrollPaneStyle();
-		scrollarrows = new Image(new Texture(Gdx.files.internal("scrollarrows.png")));
-		//scrollstyle.vScroll = scrollarrows.getDrawable();
-		scrollstyle.vScrollKnob = scrollarrows.getDrawable();
-		//scrollstyle.background = scrollarrows.getDrawable();
-		scroller 	= new ScrollPane(container, scrollstyle);
-		scroller.setScrollbarsOnTop(true);
-		scroller.setScrollBarPositions(true, true);
-		scroller.setSize(250, 200);
-		table.setBounds(0, 0, 300, 300);
-		table.add(scroller).row();
-		table.add(backbtn);
+		container.add(text).width(260);
 
-		//scroller.setBounds(0, 300, 300, 90);
+		scroller 	= new ScrollPane(container, skin, "alpha");
+
+		backbtn 	= new TextButton("Return to menu", skin);
 		
+		table.setBounds(0, 0, 300, 300);
+		table.add(scroller).width(300).row();
+		table.add(backbtn);
 
 		backbtn.addListener(new ClickListener() {
 			public void clicked(InputEvent event, float x, float y) {

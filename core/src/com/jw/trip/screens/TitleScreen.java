@@ -23,7 +23,10 @@ public class TitleScreen extends AbstractScreen {
 	
 	Table 				menuButtonTable;
 	Skin 				menuButtonSkin;
-	TextButton 			buttonPlay, buttonContinue, buttonHelp, buttonExit;
+	TextButton 			buttonplay;
+	TextButton 			buttoncontinue;
+	TextButton 			buttonhelp;
+	TextButton 			buttonexit;
 
 	public TitleScreen(final TripToSpace game) {
 		super(game);
@@ -51,11 +54,11 @@ public class TitleScreen extends AbstractScreen {
 		menuButtonSkin = new Skin(Gdx.files.internal("mainMenu/mainMenuButtons.json"),
 				new TextureAtlas(Gdx.files.internal("mainMenu/mainMenuButtons.pack")));
 		
-		buttonPlay = new TextButton("New game", menuButtonSkin, "buttonPlay");
-		buttonContinue = new TextButton("Continue", menuButtonSkin, "buttonContinue");
-		buttonHelp = new TextButton("Help", menuButtonSkin, "buttonHelp");
-		buttonExit = new TextButton("Exit", menuButtonSkin, "buttonExit");		
-		buttonPlay.addListener(new ClickListener() {
+		buttonplay = new TextButton("New game", menuButtonSkin, "buttonPlay");
+		buttoncontinue = new TextButton("Continue", menuButtonSkin, "buttonContinue");
+		buttonhelp = new TextButton("Help", menuButtonSkin, "buttonHelp");
+		buttonexit = new TextButton("Exit", menuButtonSkin, "buttonExit");		
+		buttonplay.addListener(new ClickListener() {
 			public void clicked(InputEvent event, float x, float y) {
 				bkgimage.addAction(Actions.sequence(Actions.fadeOut(0.6f), Actions.run(new Runnable() {				
 					public void run() {				
@@ -65,7 +68,7 @@ public class TitleScreen extends AbstractScreen {
 					}
 				})));
 			}});
-		buttonHelp.addListener(new ClickListener() {
+		buttonhelp.addListener(new ClickListener() {
 			public void clicked(InputEvent event, float x, float y) {
 				bkgimage.addAction(Actions.sequence(Actions.fadeOut(0.6f), Actions.run(new Runnable() {				
 					public void run() {				
@@ -74,7 +77,7 @@ public class TitleScreen extends AbstractScreen {
 					}
 				})));
 			}});
-		buttonExit.addListener(new ClickListener() {
+		buttonexit.addListener(new ClickListener() {
 			public void clicked(InputEvent event, float x, float y) {
 				bkgimage.addAction(Actions.sequence(Actions.fadeOut(0.6f), Actions.run(new Runnable() {				
 					public void run() {				
@@ -84,10 +87,10 @@ public class TitleScreen extends AbstractScreen {
 				})));
 		}});		
 		
-		menuButtonTable.add(buttonPlay).width(Constants.worldWidth/2).height(Constants.worldHeight/9).pad(1f).space(1f).row();
-		menuButtonTable.add(buttonContinue).width(Constants.worldWidth/2).height(Constants.worldHeight/9).pad(1f).space(1f).row();
-		menuButtonTable.add(buttonHelp).width(Constants.worldWidth/2).height(Constants.worldHeight/9).pad(1f).space(1f).row();
-		menuButtonTable.add(buttonExit).width(Constants.worldWidth/2).height(Constants.worldHeight/9).pad(1f).space(1f).row();
+		menuButtonTable.add(buttonplay).width(Constants.worldWidth/2).height(Constants.worldHeight/9).pad(1f).space(1f).row();
+		menuButtonTable.add(buttoncontinue).width(Constants.worldWidth/2).height(Constants.worldHeight/9).pad(1f).space(1f).row();
+		menuButtonTable.add(buttonhelp).width(Constants.worldWidth/2).height(Constants.worldHeight/9).pad(1f).space(1f).row();
+		menuButtonTable.add(buttonexit).width(Constants.worldWidth/2).height(Constants.worldHeight/9).pad(1f).space(1f).row();
 		//menuButtonTable.setScale(0.5f);
 		stage.addActor(menuButtonTable);
 	}
