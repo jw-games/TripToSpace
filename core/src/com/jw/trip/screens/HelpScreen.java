@@ -113,7 +113,9 @@ public class HelpScreen extends AbstractScreen {
 	}
 	
 	public void dispose() {
-		
+		skin.dispose();
+		stage.dispose();
+		bkg.dispose();
 	}
 
 }

@@ -112,7 +112,8 @@ public class TitleScreen extends AbstractScreen {
 	}
 	
 	public void dispose() {
-		
+		stage.dispose();
+		bkg.dispose();		
 	}
 
 }

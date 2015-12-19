@@ -11,7 +11,6 @@ import com.badlogic.gdx.scenes.scene2d.ui.ScrollPane;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
-import com.badlogic.gdx.scenes.scene2d.ui.ScrollPane.ScrollPaneStyle;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.jw.trip.TripToSpace;
 import com.jw.trip.utils.Constants;
@@ -26,14 +25,17 @@ public class ReadScreen extends AbstractScreen {
 	
 	Label				text;
 	ScrollPane			scroller;
-	ScrollPaneStyle		scrollstyle;
-	Image				scrollarrows;
-	TextButton			continuebtn;
-	Table				table;
 	Table				container;
 
-	public ReadScreen(TripToSpace game) {
+	TextButton			continuebtn;
+	
+	Table				screenlayout;
+
+	public ReadScreen(final TripToSpace game) {
 		super(game);
+		
+		// Check decisions string
+		Gdx.app.log(TripToSpace.LOG, "Decision string is: " + game.decisions);
 		
 		// Create skin
 		skin = new Skin(Gdx.files.internal("skin/uiskin.json"));
@@ -57,7 +59,7 @@ public class ReadScreen extends AbstractScreen {
 		text 		= new Label(game.gamedata.data.get(game.decisions).get(0), skin);
 		text.setWrap(true);
 
-		table		= new Table();
+		screenlayout		= new Table();
 		container	= new Table();
 		container.add(text).width(260);
 
@@ -66,16 +68,16 @@ public class ReadScreen extends AbstractScreen {
 		continuebtn	= new TextButton("Continue", skin);
 		continuebtn.addListener(new ClickListener() {
 			public void clicked(InputEvent event, float x, float y) {		
-				
+				dispose();
+				game.setScreen(new ChoiceScreen(game));
 			}
 		});
 
-		table.setBounds(0, 0, 300, 300);
-		table.add(scroller).width(300).row();
-		table.add(continuebtn);
+		screenlayout.setBounds(0, 0, 300, 300);
+		screenlayout.add(scroller).width(300).row();
+		screenlayout.add(continuebtn);
 
-		stage.addActor(table);
-		scroller.setPosition(Constants.worldWidth/2, Constants.worldHeight/2);
+		stage.addActor(screenlayout);
 		
 		}
 	
@@ -96,6 +98,9 @@ public class ReadScreen extends AbstractScreen {
 	}
 	
 	public void dispose() {
+		skin.dispose();
+		stage.dispose();
+		bkg.dispose();
 		
 	}
 
