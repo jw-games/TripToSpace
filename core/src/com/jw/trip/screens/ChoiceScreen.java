@@ -101,14 +101,17 @@ public class ChoiceScreen extends AbstractScreen {
 						}
 					});
 				}
-				returnbtn = new TextButton("Read again", skin);
-				container.add(returnbtn);
-				returnbtn.addListener(new ClickListener() {
-					public void clicked(InputEvent event, float x, float y) {		
-						game.setScreen(new ReadScreen(game));
-					}
-				});
 			}
+			returnbtn = new TextButton("Read again", skin);
+			container.add(returnbtn);
+			returnbtn.addListener(new ClickListener() {
+				public void clicked(InputEvent event, float x, float y) {		
+					game.setScreen(new ReadScreen(game));
+				}
+			});
+		}
+		else {
+			
 		}
 		
 		
