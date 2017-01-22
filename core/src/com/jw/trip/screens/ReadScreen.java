@@ -14,6 +14,8 @@ import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.jw.trip.TripToSpace;
 import com.jw.trip.utils.Constants;
+import com.jw.trip.utils.Page;
+import com.jw.trip.utils.Player;
 
 public class ReadScreen extends AbstractScreen {
 	
@@ -22,7 +24,10 @@ public class ReadScreen extends AbstractScreen {
 	
 	Texture 			bkg;
 	Image				bkgimage;
+	Texture				picture;
+	Image				pictureimage;
 	
+	Label				title;
 	Label				text;
 	ScrollPane			scroller;
 	Table				container;
@@ -30,12 +35,16 @@ public class ReadScreen extends AbstractScreen {
 	TextButton			continuebtn;
 	
 	Table				screenlayout;
+	
+	Page				page;
 
 	public ReadScreen(final TripToSpace game) {
 		super(game);
 		
 		// Check decisions string
-		Gdx.app.log(TripToSpace.LOG, "Decision string is: " + game.decisions);
+		Gdx.app.log(TripToSpace.LOG, "Decision string is: " + game.player.getPagename());
+		page = game.player.getPage(game.player.getPagename());
+		Gdx.app.log(TripToSpace.LOG, page.getText());
 		
 		// Create skin
 		skin = new Skin(Gdx.files.internal("skin/uiskin.json"));
@@ -56,11 +65,19 @@ public class ReadScreen extends AbstractScreen {
 		bkgimage.addAction(Actions.sequence(Actions.delay(0.2f), Actions.alpha(0.2f), Actions.fadeIn(0.3f)));
 		stage.addActor(bkgimage);
 		
-		text 		= new Label(game.gamedata.data.get(game.decisions).get(0), skin);
+		title = new Label(page.getTitle(), skin);
+		text = new Label(page.getText(), skin);
 		text.setWrap(true);
 
 		screenlayout		= new Table();
 		container	= new Table();
+		if (!page.getPicture().equals("null")) {
+			Gdx.app.log(TripToSpace.LOG, "Picture: " + page.getPicture());
+			picture = new Texture(Gdx.files.internal(page.getPicture()));
+			pictureimage = new Image(picture);
+			//pictureimage.setSize(50, 50);
+			container.add(pictureimage).width(100).height(100).row();
+		}
 		container.add(text).width(260);
 
 		scroller 	= new ScrollPane(container, skin, "alpha");
@@ -74,6 +91,7 @@ public class ReadScreen extends AbstractScreen {
 		});
 
 		screenlayout.setBounds(0, 0, 300, 300);
+		screenlayout.add(title).width(300).row();
 		screenlayout.add(scroller).width(300).row();
 		screenlayout.add(continuebtn);
 

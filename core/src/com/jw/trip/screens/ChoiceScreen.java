@@ -17,6 +17,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.jw.trip.TripToSpace;
 import com.jw.trip.utils.Constants;
+import com.jw.trip.utils.Page;
 
 public class ChoiceScreen extends AbstractScreen {
 
@@ -26,8 +27,8 @@ public class ChoiceScreen extends AbstractScreen {
 	Texture 			bkg;
 	Image				bkgimage;
 	
-	int					optionslength;
-	List<String>		options;
+	int					choiceslength;
+	List<String>		choices;
 	
 	Label				text;
 	ScrollPane			scroller;
@@ -39,9 +40,14 @@ public class ChoiceScreen extends AbstractScreen {
 	
 	Table				screenlayout;
 	Table				container;
+	
+	Page				page;
 
 	public ChoiceScreen(final TripToSpace game) {
 		super(game);
+		
+		page = game.player.getPage(game.player.getPagename());
+
 		
 		// Create skin
 		skin 			= new Skin(Gdx.files.internal("skin/uiskin.json"));
@@ -65,39 +71,39 @@ public class ChoiceScreen extends AbstractScreen {
 		screenlayout	= new Table();
 		container		= new Table();
 		
-		options = new ArrayList<String>();
-		optionslength = game.gamedata.data.get(game.decisions).size() - 1;
-		Gdx.app.log(TripToSpace.LOG, "Decisions list length is: " + optionslength);
+		choices = page.getChoices();
+		Gdx.app.log(TripToSpace.LOG, "Decisions list length is: " + choices.size());
 		
-		if (optionslength > 1) {
-			for (int i = 1; i <= optionslength; i++) {
-				if (i == 1) {
-					abtn = new TextButton(game.gamedata.data.get(game.decisions).get(i), skin);
+		if (choices.size() > 1) {
+			for (int i = 0; i < choices.size(); i++) {
+				if (i == 0) {
+					final String choice1 = choices.get(i);
+					abtn = new TextButton(choice1, skin);
 					container.add(abtn).center().width(250).row();
 					abtn.addListener(new ClickListener() {
 						public void clicked(InputEvent event, float x, float y) {		
-							game.decisions += "a";
-							game.setScreen(new ReadScreen(game));
+							Gdx.app.log(TripToSpace.LOG, "Choice is is: " + choice1);
+							game.player.recordChoice(choice1);
+						}
+					});
+				}
+				if (i == 1) {
+					final String choice2 = choices.get(i);
+					bbtn = new TextButton(choices.get(i), skin);
+					container.add(bbtn).center().width(250).row();
+					bbtn.addListener(new ClickListener() {
+						public void clicked(InputEvent event, float x, float y) {		
+							game.player.recordChoice(choice2);
 						}
 					});
 				}
 				if (i == 2) {
-					bbtn = new TextButton(game.gamedata.data.get(game.decisions).get(i), skin);
-					container.add(bbtn).center().width(250).row();
-					bbtn.addListener(new ClickListener() {
-						public void clicked(InputEvent event, float x, float y) {		
-							game.decisions += "b";
-							game.setScreen(new ReadScreen(game));
-						}
-					});
-				}
-				if (i == 3) {
-					cbtn = new TextButton(game.gamedata.data.get(game.decisions).get(i), skin);
+					final String choice3 = choices.get(i);
+					cbtn = new TextButton(choices.get(i), skin);
 					container.add(cbtn).center().width(250).row();
 					cbtn.addListener(new ClickListener() {
 						public void clicked(InputEvent event, float x, float y) {		
-							game.decisions += "c";
-							game.setScreen(new ReadScreen(game));
+							game.player.recordChoice(choice3);
 						}
 					});
 				}

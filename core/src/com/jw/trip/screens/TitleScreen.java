@@ -47,17 +47,20 @@ public class TitleScreen extends AbstractScreen {
 		bkgimage.addAction(Actions.sequence(Actions.delay(1f), Actions.alpha(0f), Actions.fadeIn(2f)));
 		stage.addActor(bkgimage);
 		
-		// Set up button table actors and listeners
+		// Set up button table 
 		menuButtonTable = new Table();
 		menuButtonTable.setPosition(Constants.worldWidth/2, Constants.worldHeight/3);
 		//menuButtonTable.setBounds(worldWidth/4, worldHeight/8, worldWidth/2, worldHeight*0.75f);
 		menuButtonSkin = new Skin(Gdx.files.internal("mainMenu/mainMenuButtons.json"),
 				new TextureAtlas(Gdx.files.internal("mainMenu/mainMenuButtons.pack")));
 		
+		// Create the buttons 
 		buttonplay = new TextButton("New game", menuButtonSkin, "buttonPlay");
 		buttoncontinue = new TextButton("Continue", menuButtonSkin, "buttonContinue");
 		buttonhelp = new TextButton("Help", menuButtonSkin, "buttonHelp");
-		buttonexit = new TextButton("Exit", menuButtonSkin, "buttonExit");		
+		buttonexit = new TextButton("Exit", menuButtonSkin, "buttonExit");
+		
+		// Add listeners to perform action when buttons are pressed
 		buttonplay.addListener(new ClickListener() {
 			public void clicked(InputEvent event, float x, float y) {
 				bkgimage.addAction(Actions.sequence(Actions.fadeOut(0.6f), Actions.run(new Runnable() {				
@@ -87,6 +90,7 @@ public class TitleScreen extends AbstractScreen {
 				})));
 		}});		
 		
+		// Place the buttons onto the table then add table to stage
 		menuButtonTable.add(buttonplay).width(Constants.worldWidth/2).height(Constants.worldHeight/9).pad(1f).space(1f).row();
 		menuButtonTable.add(buttoncontinue).width(Constants.worldWidth/2).height(Constants.worldHeight/9).pad(1f).space(1f).row();
 		menuButtonTable.add(buttonhelp).width(Constants.worldWidth/2).height(Constants.worldHeight/9).pad(1f).space(1f).row();

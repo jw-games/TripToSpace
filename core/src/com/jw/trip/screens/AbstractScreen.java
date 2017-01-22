@@ -6,6 +6,7 @@ import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.utils.TimeUtils;
 import com.jw.trip.TripToSpace;
+import com.jw.trip.utils.Player;
 
 public class AbstractScreen implements Screen {
 	protected final 	TripToSpace game;
